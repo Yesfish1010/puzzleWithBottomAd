@@ -1,0 +1,124 @@
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+html{
+    background-color: black;
+}
+
+body{
+    background-color: white;
+}
+
+canvas {
+    background-color: black;
+}
+
+/*手機*/
+@media (max-width: 600px) {
+
+    #container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        background-color: white;
+    }
+
+    #container1{
+        display: flex;
+        width: 100vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
+    
+    #countdown{
+        font-size: small;
+        margin: 0; 
+    }
+    
+    canvas{
+        max-width: 100%;
+    }
+
+    #container2, #container3{
+        flex-grow: 1;
+        width: 100vw;
+        padding-top: 10px;
+    }
+
+    .image {
+        background-image: url("./image/ad.jpg");
+        background-size:100% auto;
+        background-repeat: no-repeat;
+        background-position: center top  ;
+        width: 100%;
+        height: 100%;
+      }
+
+}
+
+/*電腦*/
+@media (min-width: 601px){
+
+    body{
+        height: 569px;
+        width: 415px;
+    }
+    
+    #container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        background-color: white;
+    }
+
+    #container1{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        position: relative;
+    }
+
+    #countdown{
+        font-size: small;
+        margin: 0; 
+        position: relative;
+        top:1px;
+    }
+
+    #container2, #container3{
+        flex-grow: 1;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+        background-image: url("./image/ad.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center top  ;
+    }
+    
+}
+
+
+
+
