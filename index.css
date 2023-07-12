@@ -4,7 +4,7 @@ body, html {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-  }
+}
 
 html{
     background-color: black;
@@ -36,6 +36,10 @@ dialog::backdrop {
 
 /*手機與平板*/
 @media (max-width: 840px) {
+
+    body{
+        max-width: 399px;
+    }
 
     #container {
         display: flex;
@@ -72,7 +76,6 @@ dialog::backdrop {
         padding-top: 10px;
         display: flex;
         justify-content: center;
-        align-items: center;
     }
 
     .image {
@@ -135,6 +138,9 @@ dialog::backdrop {
         flex-grow: 1;
         width: 100%;
         padding-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items:flex-start;
     }
 
     .image {
