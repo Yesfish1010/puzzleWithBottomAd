@@ -117,7 +117,12 @@ var refreshImagePositions = function(origin, target) { //(起始位置,目標位
     var originRect = rectForPosition(origin);
     //clearRect設定指定矩形（x, y, width, height)範圍內的所有像素為透明，清除所有先前繪製的內容。
     context.clearRect(originRect[0], originRect[1], originRect[2], originRect[3]);
-    drawImageItem(imageIndexForPosition[target], target);
+    if (level == 1) {
+        drawImageItem(imageIndexForPosition[target], target);
+    }
+    else if (level == 2) {
+        drawImageItem2(imageIndexForPosition[target], target);
+    }
 }
 
 //繪製所有圖片          
