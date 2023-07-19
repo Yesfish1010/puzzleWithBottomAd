@@ -16,6 +16,8 @@ var countdownInterval = null;
 var countdownElement = document.getElementById("countdown");
 var remainingSeconds = null;
 
+var level = 1; //關卡
+
 //初始化加載
 window.onload = function() {
     setupRandomPosition();
@@ -40,7 +42,9 @@ background.onclick = function(e) {
     }
     
     if (checkIfFinish()) {
-        drawImageItem(imageIndexForPosition[lastIndex()], lastIndex()); //將最後一張圖片顯示在圖上
+        setTimeout(function() {
+            drawImageItem(imageIndexForPosition[lastIndex()], lastIndex()); //將最後一張圖片顯示在圖上
+            }, 1000); 
         isFinish = true; //當拼圖完成後，玩家就不能再移動，更改isFinish的值
     }
 };
@@ -81,7 +85,9 @@ document.onkeyup = function(event) {
     }
 
     if (checkIfFinish()) {
-        drawImageItem(imageIndexForPosition[lastIndex()], lastIndex());
+        setTimeout(function() {
+            drawImageItem(imageIndexForPosition[lastIndex()], lastIndex());
+            }, 1000);
         isFinish = true;
     }
 }
@@ -90,6 +96,16 @@ document.onkeyup = function(event) {
 var drawImageItem = function(index, position) { //(圖片索引,圖片位置(0~column^2-1))
     var img = new Image(); //用 Image()來建構一個新影像元素
     img.src = './image/dog_0' + String(index+1) + '.jpg'; //設置路徑
+    img.onload = () => { //箭頭函數 //加載完成後進行繪製
+        var rect = rectForPosition(position);
+        context.drawImage(img, rect[0], rect[1], rect[2], rect[3]); //(要繪製的圖片,左上角的x座標,左上角的y座標,寬度,高度)
+    }
+}
+
+//畫第二關
+var drawImageItem2 = function(index, position) { 
+    var img = new Image(); //用 Image()來建構一個新影像元素
+    img.src = './image/cat_0' + String(index+1) + '.jpg'; //設置路徑
     img.onload = () => { //箭頭函數 //加載完成後進行繪製
         var rect = rectForPosition(position);
         context.drawImage(img, rect[0], rect[1], rect[2], rect[3]); //(要繪製的圖片,左上角的x座標,左上角的y座標,寬度,高度)
@@ -112,6 +128,17 @@ var drawAllImage = function() {
             continue;
         }
         drawImageItem(index, position);
+    }
+}
+
+//繪製所有圖片          
+var drawAllImage2 = function() {
+    for (var position = 0; position < column * column; position++) {
+        var index = imageIndexForPosition[position];
+        if (index == lastIndex()) { //最後一張圖片不繪製
+            continue;
+        }
+        drawImageItem2(index, position);
     }
 }
 
@@ -178,11 +205,17 @@ var checkIfFinish = function() {
             return false;
         }
     }
+    level++;
     if(remainingSeconds != 0){
-        context.clearRect(0, 0, background.width, background.height);
-        setupRandomPosition();
-        drawAllImage();
-        return false;
+        if(level == 2){
+            alert("進入下一關!!")
+            setTimeout(function() {
+                context.clearRect(0, 0, background.width, background.height);
+                setupRandomPosition();
+                drawAllImage2();
+                }, 1000);
+            return false;
+        }
     }
     return true;
 }
