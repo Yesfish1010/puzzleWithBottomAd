@@ -103,6 +103,9 @@ var darwLastImage = function(){
         case 3:
             drawImageItem3(imageIndexForPosition[lastIndex()], lastIndex());
             break;
+        case 4:
+            drawImageItem4(imageIndexForPosition[lastIndex()], lastIndex());
+            break;
         default:
             break;
     }
@@ -126,6 +129,15 @@ var nextLevel = function(){
             context.clearRect(0, 0, background.width, background.height);
             setupRandomPosition();
             drawAllImage3();
+            }, 500);
+            isFinish = false;
+    }
+    else if (level == 4){
+        setTimeout(function() {
+            alert("進入下一關!!")
+            context.clearRect(0, 0, background.width, background.height);
+            setupRandomPosition();
+            drawAllImage4();
             }, 500);
             isFinish = false;
     }
@@ -166,6 +178,16 @@ var drawImageItem3 = function(index, position) {
     }
 }
 
+//畫第四關
+var drawImageItem4 = function(index, position) { 
+    var img = new Image(); //用 Image()來建構一個新影像元素
+    img.src = './image/dog2_0' + String(index+1) + '.jpg'; //設置路徑
+    img.onload = () => { //箭頭函數 //加載完成後進行繪製
+        var rect = rectForPosition(position);
+        context.drawImage(img, rect[0], rect[1], rect[2], rect[3]); //(要繪製的圖片,左上角的x座標,左上角的y座標,寬度,高度)
+    }
+}
+
 //動態刷新圖片 //圖片被滑動到新位置時，要把原本位置的圖刪掉
 var refreshImagePositions = function(origin, target) { //(起始位置,目標位置)
     var originRect = rectForPosition(origin);
@@ -179,6 +201,9 @@ var refreshImagePositions = function(origin, target) { //(起始位置,目標位
     }
     else if (level == 3) {
         drawImageItem3(imageIndexForPosition[target], target);
+    }
+    else if (level == 4) {
+        drawImageItem4(imageIndexForPosition[target], target);
     }
 }
 
@@ -210,6 +235,16 @@ var drawAllImage3 = function(){
             continue;
         }
         drawImageItem3(index, position);
+    }
+}
+
+var drawAllImage4 = function(){
+    for (var position = 0; position < column * column; position++) {
+        var index = imageIndexForPosition[position];
+        if (index == lastIndex()) { //最後一張圖片不繪製
+            continue;
+        }
+        drawImageItem4(index, position);
     }
 }
 
